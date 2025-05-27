@@ -479,3 +479,70 @@ This file **does not contain executable logic**, but it configures how Razor vie
 ### 📝 Summary
 
 `_ViewImports.cshtml` is a key configuration file that improves maintainability and clarity in your ASP.NET Core MVC Razor views. By centralizing common directives, it helps enforce consistent, DRY (Don't Repeat Yourself) practices across your application.
+
+## Understanding `_ViewStart.cshtml` in ASP.NET Core MVC
+
+The `_ViewStart.cshtml` file in ASP.NET Core MVC is a special Razor file that **runs before every Razor view** in its directory or subdirectories. It’s used to define **common layout and configuration logic**, so you don’t have to repeat it in every individual view.
+
+---
+
+### 🧠 What Does `_ViewStart.cshtml` Do?
+
+- Executes **before rendering any view** (.cshtml file)
+- Sets common properties like `Layout`
+- Helps maintain **DRY (Don't Repeat Yourself)** principles
+
+---
+
+### 🔧 Common Usage
+
+The most common use of `_ViewStart.cshtml` is to specify a shared layout for Razor views:
+
+```razor
+@{
+    Layout = "_Layout";
+}
+```
+
+This tells Razor to wrap every view in that folder with the `_Layout.cshtml` file (unless overridden in the view itself).
+
+---
+
+### 📁 File Placement
+
+- Located in the `Views` folder (often directly inside `/Views`)
+- Applies to **all views in its folder and subfolders**
+- You can also create **nested `_ViewStart.cshtml`** files in subfolders for **custom layout control**
+
+---
+
+### 📌 Example Structure
+
+```
+/Views
+  |_ _ViewStart.cshtml     --> applies to all views
+  |_ Home/
+      |_ Index.cshtml      --> inherits layout from _ViewStart.cshtml
+```
+
+---
+
+### ✅ Benefits
+
+- 🧼 **Cleaner Views** – No need to declare `Layout` in every view
+- 🧩 **Reusable Configuration** – Centralized view logic
+- 🔄 **Flexible Overrides** – Can override layout at the view level
+
+---
+
+### ⚠️ Notes
+
+- `_ViewStart.cshtml` only affects **Razor views (.cshtml)**.
+- It's executed **before the view**, but **after** `_ViewImports.cshtml`.
+
+---
+
+### 📝 Summary
+
+`_ViewStart.cshtml` is a Razor helper file that simplifies layout assignment and view-level configuration. By running before each view, it helps enforce consistent UI structure and minimizes repetitive layout declarations.
+
