@@ -546,3 +546,54 @@ This tells Razor to wrap every view in that folder with the `_Layout.cshtml` fil
 
 `_ViewStart.cshtml` is a Razor helper file that simplifies layout assignment and view-level configuration. By running before each view, it helps enforce consistent UI structure and minimizes repetitive layout declarations.
 
+## Dependency Injection
+![image](https://github.com/user-attachments/assets/df93d817-4d38-47da-bf01-bfe688d2ff24)
+
+### 🔄 Dependency Injection (DI) in ASP.NET Core
+
+**Dependency Injection (DI)** is a software design pattern that enables **loose coupling** between classes and their dependencies. Instead of creating dependencies manually using `new`, they are injected into a class, typically through a **DI container**.
+
+---
+
+### 📊 Diagram Explanation: "With Dependency Injection"
+
+The image represents a structure where **Email** and **Database** services are injected into different **Pages** via a **DI Container**.
+
+#### 🔁 Workflow:
+
+1. **Email** and **Database** services implement interfaces (`IEmail`, `IDb`).
+2. These services are registered in the **DI Container**:
+    ```csharp
+    services.AddScoped<IEmail, Email_new>();
+    services.AddScoped<IDb, Db_new>();
+    ```
+3. The DI Container injects the appropriate implementations into Pages:
+    - `Page1`, `Page2`, and `Page3` receive `IEmail` and `IDb` instances.
+4. Pages use the injected services **without knowing their exact implementations**.
+
+---
+
+### 🧩 Why Use DI?
+
+| Without DI | With DI |
+|------------|---------|
+| `Page1` directly creates `new Email()` | `Page1` receives `IEmail` via constructor |
+| Tightly coupled | Loosely coupled |
+| Hard to test | Easy to test with mocks |
+| Difficult to change implementations | Easy to swap implementations |
+
+---
+
+### ✅ Benefits of DI
+
+- 🔧 **Centralized Configuration** with DI container
+- 📦 **Cleaner Code** with reduced duplication
+- 🧪 **Better Unit Testing** support
+- 🔁 **Flexible and Maintainable Architecture**
+
+---
+
+### 💡 Summary
+
+Dependency Injection promotes better architecture by decoupling components. Services like Email and Database can be registered and injected, allowing for **modular**, **testable**, and **scalable** applications.
+
