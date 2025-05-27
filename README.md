@@ -304,3 +304,59 @@ The `Program.cs` file in ASP.NET Core is where your app starts. In .NET 6 and la
 ## Routing
 ![image](https://github.com/user-attachments/assets/b99f5bcb-ac00-4b57-b2b1-51013081a13d)
 
+## Shared Folder(Views)
+**Understanding `Views/Shared` Folder in ASP.NET Core MVC**
+
+### 📁 Purpose of `Views/Shared`
+
+The `Views/Shared` folder in an ASP.NET Core MVC project is used to store **reusable UI components** and views that are shared across multiple controllers. It helps maintain consistency and avoid duplication in your application's UI.
+
+---
+
+### 📂 Common Files in `Views/Shared`
+
+| File Name                       | Purpose |
+|----------------------------------|---------|
+| **_Layout.cshtml**              | Defines the common HTML structure used across all views (master page). |
+| **_ViewStart.cshtml**           | Executed before every view; typically used to set the layout. |
+| **_ViewImports.cshtml**         | Imports namespaces, tag helpers, and directives globally for views. |
+| **_ValidationScriptsPartial.cshtml** | Contains validation scripts like jQuery validation. |
+| **Error.cshtml**                | Displays generic error messages when exceptions occur. |
+| **Partial Views (e.g., _Navbar.cshtml)** | Reusable UI fragments like headers, footers, navbars, etc. |
+
+---
+
+### 📌 Example: `_Layout.cshtml`
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewData["Title"] - MyApp</title>
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body>
+    <header>@Html.Partial("_Navbar")</header>
+    <main role="main" class="container">
+        @RenderBody()
+    </main>
+    <footer>@Html.Partial("_Footer")</footer>
+    <script src="~/js/site.js"></script>
+</body>
+</html>
+```
+
+---
+
+### ✅ Benefits
+
+- ♻️ **Reusability** — Create once, use everywhere  
+- 🧼 **Cleaner Code** — Reduce redundancy across views  
+- 🎨 **Consistency** — Centralize layout and UI behavior  
+- 🛠️ **Maintainability** — Easier updates to common UI parts  
+
+---
+
+### 📝 Summary
+
+The `Views/Shared` folder is a key part of the MVC pattern in ASP.NET Core. It enables you to manage common layout files and partial views in a single location, supporting maintainable and scalable applications.
