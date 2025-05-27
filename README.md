@@ -412,7 +412,7 @@ The naming convention provides **immediate context** to developers.
 
 The underscore (`_`) prefix is a **convention** used to:
 
-- ♻ Mark reusable or partial views
+- ♻ Mark reusable or **`partial views`**
 - 🚫 Exclude from direct routing
 - 🧠 Improve clarity for developers
 
