@@ -297,3 +297,6 @@ Now in .NET 6+, everything is combined in `Program.cs` for simplicity.
 ## 📝 Summary
 
 The `Program.cs` file in ASP.NET Core is where your app starts. In .NET 6 and later, it uses the **minimal hosting model** to streamline app setup, service registration, and middleware configuration into a single file.
+
+# MVC Architecture
+![image](https://github.com/user-attachments/assets/942ba8f3-a18b-4347-8537-26dcd8282dc9)
