@@ -23,7 +23,7 @@
 ### Project Type
 Create an Asp.net Core Web App(Model-View-Controller) project with c# language and use the .net9 as framework.
 
-### Project file 
+## .csproj Project files
 ![image](https://github.com/user-attachments/assets/15e263a4-fb71-4f87-8be5-8d29721be668)
 
 ### Understanding `<ImplicitUsings>enable</ImplicitUsings>` in .NET Core MVC Projects
