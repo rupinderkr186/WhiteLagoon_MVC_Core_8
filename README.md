@@ -40,13 +40,13 @@ in a `.NET 6+` project `.csproj` file enables **implicit global using directives
 
 ---
 
-## ✅ What Does It Do?
+#### ✅ What Does It Do?
 
 When enabled, the .NET SDK **automatically includes frequently used namespaces** globally for your project. This helps to reduce repetitive boilerplate in each `.cs` file.
 
 ---
 
-## 📦 Typical Implicit Usings in ASP.NET Core (MVC)
+#### 📦 Typical Implicit Usings in ASP.NET Core (MVC)
 
 For projects using the `Microsoft.NET.Sdk.Web` SDK (e.g., ASP.NET Core MVC apps), the following namespaces are commonly included implicitly:
 
@@ -68,7 +68,7 @@ The actual list may vary depending on the project type and SDK version.
 
 ---
 
-## 📂 How to View Implicit Usings
+#### 📂 How to View Implicit Usings
 
 To see what namespaces are included automatically, open:
 
@@ -80,9 +80,9 @@ This auto-generated file contains all the injected global `using` statements.
 
 ---
 
-## ⚙️ How to Enable or Disable
+#### ⚙️ How to Enable or Disable
 
-### Enable
+##### Enable
 
 ```xml
 <PropertyGroup>
@@ -90,7 +90,7 @@ This auto-generated file contains all the injected global `using` statements.
 </PropertyGroup>
 ```
 
-### Disable
+##### Disable
 
 ```xml
 <PropertyGroup>
@@ -102,7 +102,7 @@ Or omit the property entirely to use the SDK's default behavior.
 
 ---
 
-## 💡 Related Setting: `<Nullable>enable</Nullable>`
+#### 💡 Related Setting: `<Nullable>enable</Nullable>`
 
 This setting enables **nullable reference types** for improved null-safety:
 
@@ -114,7 +114,7 @@ This setting enables **nullable reference types** for improved null-safety:
 
 ---
 
-## ✅ Benefits of Implicit Usings
+#### ✅ Benefits of Implicit Usings
 
 - ✂️ Less boilerplate
 - 🧼 Cleaner code files
@@ -122,14 +122,14 @@ This setting enables **nullable reference types** for improved null-safety:
 
 ---
 
-## ❓ When to Avoid It
+#### ❓ When to Avoid It
 
 - When you want **full control** over all `using` directives
 - In projects with **strict code standards or analysis rules**
 
 ---
 
-## 📎 Conclusion
+#### 📎 Conclusion
 
 Using `<ImplicitUsings>enable</ImplicitUsings>` simplifies .NET development by reducing redundant `using` directives. It's especially helpful in ASP.NET Core and console apps using .NET 6 and newer.
 
