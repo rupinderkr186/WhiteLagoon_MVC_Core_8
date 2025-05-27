@@ -417,3 +417,65 @@ The underscore (`_`) prefix is a **convention** used to:
 - 🧠 Improve clarity for developers
 
 It’s not technically required, but **strongly recommended** for clarity and to follow MVC best practices.
+
+## Understanding `_ViewImports.cshtml` in ASP.NET Core MVC
+
+The `_ViewImports.cshtml` file in an ASP.NET Core MVC project is used to apply **common Razor directives** across all views in the same folder and its subfolders. This helps ensure **consistency** and **reduces repetition** in Razor view files.
+
+---
+
+### 🧠 What Is `_ViewImports.cshtml`?
+
+It’s a special file that allows you to:
+
+- Import **namespaces**
+- Register or remove **tag helpers**
+- Define common **Razor directives**
+
+This file **does not contain executable logic**, but it configures how Razor views behave.
+
+---
+
+### 🧩 Common Directives
+
+| Directive                  | Description                                      |
+|----------------------------|--------------------------------------------------|
+| `@using`                   | Imports a namespace for use in Razor views       |
+| `@addTagHelper`           | Enables tag helpers (e.g., form helpers)         |
+| `@removeTagHelper`        | Disables specific tag helpers                    |
+| `@model` (rare here)      | Specifies a default model type (not commonly used) |
+
+---
+
+### 📦 Example
+
+```razor
+@using MyApp.Models
+@using Microsoft.AspNetCore.Identity
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+```
+
+#### 🔍 What this does:
+- Enables use of types from `MyApp.Models` in all views.
+- Allows use of tag helpers like `<form asp-action="Login">` without additional config.
+
+---
+
+### ⚠️ Notes
+
+- Affects all `.cshtml` views in the **same folder and below**.
+- You can define multiple `_ViewImports.cshtml` files to **scope settings to different folders**.
+
+---
+
+### ✅ Benefits
+
+- 🧼 **Cleaner Razor Views** – No need to repeat directives in every file.
+- 🎯 **Consistent Behavior** – Ensures views follow the same conventions.
+- 📁 **Scoped Settings** – Customize behavior for different areas of your app.
+
+---
+
+### 📝 Summary
+
+`_ViewImports.cshtml` is a key configuration file that improves maintainability and clarity in your ASP.NET Core MVC Razor views. By centralizing common directives, it helps enforce consistent, DRY (Don't Repeat Yourself) practices across your application.
