@@ -300,3 +300,7 @@ The `Program.cs` file in ASP.NET Core is where your app starts. In .NET 6 and la
 
 # MVC Architecture
 ![image](https://github.com/user-attachments/assets/942ba8f3-a18b-4347-8537-26dcd8282dc9)
+
+## Routing
+![image](https://github.com/user-attachments/assets/b99f5bcb-ac00-4b57-b2b1-51013081a13d)
+
