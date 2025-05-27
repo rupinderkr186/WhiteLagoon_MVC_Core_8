@@ -23,7 +23,7 @@
 ### Project Type
 Create an Asp.net Core Web App(Model-View-Controller) project with c# language and use the .net9 as framework.
 
-## .csproj Project files
+## .csproj project file
 ![image](https://github.com/user-attachments/assets/15e263a4-fb71-4f87-8be5-8d29721be668)
 
 ### Understanding `<ImplicitUsings>enable</ImplicitUsings>` in .NET Core MVC Projects
@@ -134,3 +134,79 @@ This setting enables **nullable reference types** for improved null-safety:
 Using `<ImplicitUsings>enable</ImplicitUsings>` simplifies .NET development by reducing redundant `using` directives. It's especially helpful in ASP.NET Core and console apps using .NET 6 and newer.
 
 ---
+## launchSetting.json(inside Properties)
+![image](https://github.com/user-attachments/assets/edb5af2f-5d3d-479b-a775-c1fdf8403e06)
+
+
+### Explanation of `launchSettings.json` in ASP.NET Core
+
+The file shown is `launchSettings.json`, a configuration file used by .NET projects (typically ASP.NET Core) to define how the application should be launched during development.
+
+This file resides in the `Properties` folder of a .NET project and is **not used in production** — it only affects how the project runs locally in development environments using Visual Studio, Visual Studio Code, or the `dotnet` CLI.
+
+---
+
+### Breakdown of the File
+
+#### 1. `$schema`
+```json
+"$schema": "https://json.schemastore.org/launchsettings.json"
+```
+- This is a schema reference for validation and IntelliSense in supporting editors like Visual Studio.
+
+---
+
+#### 2. `profiles`
+This section defines **how different environments or servers launch the app**. Here, there are two profiles: `http` and `https`.
+
+---
+
+### Profile: `http`
+```json
+"http": {
+  "commandName": "Project",
+  "dotnetRunMessages": true,
+  "launchBrowser": true,
+  "applicationUrl": "http://localhost:5276",
+  "environmentVariables": {
+    "ASPNETCORE_ENVIRONMENT": "Development"
+  }
+}
+```
+
+- **`commandName`**: `"Project"` tells Visual Studio to run the project as defined.
+- **`dotnetRunMessages`**: `true` enables logging messages like "Now listening on...".
+- **`launchBrowser`**: `true` automatically opens your default browser when the app runs.
+- **`applicationUrl`**: Specifies the base URL used to host the app (HTTP only here).
+- **`environmentVariables`**: Sets environment variables, like `"ASPNETCORE_ENVIRONMENT": "Development"` — important for loading the correct `appsettings.{env}.json`.
+
+---
+
+### Profile: `https`
+```json
+"https": {
+  "commandName": "Project",
+  "dotnetRunMessages": true,
+  "launchBrowser": true,
+  "applicationUrl": "https://localhost:7278;http://localhost:5276",
+  "environmentVariables": {
+    "ASPNETCORE_ENVIRONMENT": "Development"
+  }
+}
+```
+
+- Same properties as the HTTP profile, but:
+- **`applicationUrl`** includes both HTTPS (`7278`) and HTTP (`5276`) bindings.
+- This setup is useful for apps that serve both secure and insecure traffic in development.
+
+---
+
+### Summary
+
+- This file controls **local development startup settings** for an ASP.NET Core app.
+- It can define multiple **profiles** (e.g., different ports, environments).
+- Commonly used to:
+  - Set launch URLs
+  - Automatically open a browser
+  - Define environment (Development, Staging, Production)
+
