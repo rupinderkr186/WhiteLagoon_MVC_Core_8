@@ -210,3 +210,90 @@ This section defines **how different environments or servers launch the app**. H
   - Automatically open a browser
   - Define environment (Development, Staging, Production)
 
+## Program.cs file
+### Understanding `Program.cs` in ASP.NET Core MVC
+
+#### 🎯 What Is `Program.cs`?
+
+In an **ASP.NET Core MVC** project, `Program.cs` is the **main entry point**. It configures and starts the **web host**, sets up the services, and defines the **HTTP request pipeline**.
+
+---
+
+#### 🧠 Key Responsibilities
+
+- 🎬 Acts as the application's starting point  
+- 🛠️ Builds and configures the web host  
+- 🔧 Registers services (dependency injection)  
+- 🌐 Configures middleware and routing  
+- 🚀 Launches the application  
+
+---
+
+#### ✅ Example: `Program.cs` in .NET 6+ (Minimal Hosting Model)
+
+```csharp
+var builder = WebApplication.CreateBuilder(args);
+
+// Add services to the container
+builder.Services.AddControllersWithViews();
+builder.Services.AddRazorPages();
+// builder.Services.AddDbContext<YourDbContext>();
+
+var app = builder.Build();
+
+// Configure the HTTP request pipeline
+if (!app.Environment.IsDevelopment())
+{
+    app.UseExceptionHandler("/Home/Error");
+    app.UseHsts();
+}
+
+app.UseHttpsRedirection();
+app.UseStaticFiles();
+
+app.UseRouting();
+
+app.UseAuthentication();
+app.UseAuthorization();
+
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.Run();
+```
+#### 🧱 Components Explained
+
+| Code                          | Purpose                                      |
+|------------------------------|----------------------------------------------|
+| `CreateBuilder(args)`        | Initializes host with defaults               |
+| `builder.Services.Add...`    | Adds services to the DI container            |
+| `app.Use...`                 | Adds middleware to the HTTP pipeline         |
+| `app.MapControllerRoute(...)`| Configures MVC routing                       |
+| `app.Run()`                  | Starts listening for incoming requests       |
+
+---
+
+#### 🔄 Pre-.NET 6: `Startup.cs` Model
+
+Before .NET 6, apps used both:
+
+- `Program.cs`: Host setup  
+- `Startup.cs`: Service and middleware configuration  
+
+Now in .NET 6+, everything is combined in `Program.cs` for simplicity.
+
+---
+
+#### ✅ Benefits of New `Program.cs`
+
+- 🧼 Cleaner and more concise  
+- 🚀 Simplifies bootstrapping  
+- 📦 All configuration in one place  
+- 🔄 Easier to understand and maintain  
+
+---
+
+## 📝 Summary
+
+The `Program.cs` file in ASP.NET Core is where your app starts. In .NET 6 and later, it uses the **minimal hosting model** to streamline app setup, service registration, and middleware configuration into a single file.
