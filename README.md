@@ -360,3 +360,60 @@ The `Views/Shared` folder in an ASP.NET Core MVC project is used to store **reus
 ### 📝 Summary
 
 The `Views/Shared` folder is a key part of the MVC pattern in ASP.NET Core. It enables you to manage common layout files and partial views in a single location, supporting maintainable and scalable applications.
+
+### Why `_` (Underscore) Is Used in Shared View Filenames in ASP.NET Core MVC
+
+In ASP.NET Core MVC, filenames like `_Layout.cshtml`, `_ViewStart.cshtml`, or `_PartialView.cshtml` commonly use a **leading underscore (`_`)** by convention. This practice has specific reasons and benefits.
+
+---
+
+#### ✅ Purpose of Using `_` in Filenames
+
+##### 1. 🌀 Indicates Reusability
+
+The underscore signals that the file is **not a standalone view**, but a **shared or reusable component**.
+
+Examples:
+- `_Layout.cshtml`: Shared layout file used across views.
+- `_Navbar.cshtml`: Partial view used for navigation.
+
+---
+
+##### 2. 🛡 Prevents Routing Conflicts
+
+ASP.NET Core MVC **ignores files starting with `_`** when mapping routes from controller actions.
+
+- Prevents unintended rendering of partial views like `_Partial.cshtml` when navigating to `/Home/_Partial`.
+
+---
+
+##### 3. 🧹 Improves Code Organization
+
+The naming convention provides **immediate context** to developers.
+
+- It’s clear `_Header.cshtml` or `_Footer.cshtml` are **partial views**, not full pages.
+- Enhances maintainability and consistency.
+
+---
+
+#### 📌 Common Examples
+
+| File Name                       | Purpose                                           |
+|----------------------------------|---------------------------------------------------|
+| `_Layout.cshtml`                | Main layout page (used via `@Layout`)             |
+| `_ViewStart.cshtml`             | Sets the layout and runs before every view        |
+| `_ViewImports.cshtml`           | Imports namespaces and tag helpers globally       |
+| `_PartialView.cshtml`           | Reusable section rendered in other views          |
+| `_ValidationScriptsPartial.cshtml` | Holds common JavaScript for client validation   |
+
+---
+
+#### 📝 Summary
+
+The underscore (`_`) prefix is a **convention** used to:
+
+- ♻ Mark reusable or partial views
+- 🚫 Exclude from direct routing
+- 🧠 Improve clarity for developers
+
+It’s not technically required, but **strongly recommended** for clarity and to follow MVC best practices.
