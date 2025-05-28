@@ -1,0 +1,93 @@
+# Architectural and Design Patterns in the Project
+
+Based on the provided sources and our conversation history, the project utilizes several key architectural and design patterns. Below are the patterns discussed, along with explanations and any mentioned alternatives.
+
+---
+
+## Clean Architecture
+
+**What it is:**  
+Clean Architecture promotes separation of concern by organizing an application into multiple circular layers where dependencies point inward. The layers are:
+
+- **Domain Layer**: Core entities and models for database tables.
+- **Application Layer**: Business logic and interfaces (e.g., repository interfaces).
+- **Infrastructure Layer**: External concerns such as databases, services, and repository implementations.
+- **Presentation Layer**: The user interface layer (e.g., web application with controllers and views).
+
+**Why it's used:**  
+The course builds a .NET Core MVC application using Clean Architecture to simplify learning and manage complexity in large applications.
+
+**Alternatives:**  
+N-Tier architecture is another common structure but differs in its approach to dependencies and separation.
+
+---
+
+## MVC (Model-View-Controller) Architecture
+
+**What it is:**
+
+- **Model**: Data representation (e.g., C# classes mapped to DB tables).
+- **View**: UI elements rendered to the user.
+- **Controller**: Handles user input and connects the model and view.
+
+**Why it's used:**  
+MVC provides a clear separation of concerns and was introduced to overcome the limitations of Web Forms.
+
+**Alternatives:**  
+Web Forms (older ASP.NET model).
+
+---
+
+## Dependency Injection (DI)
+
+**What it is:**  
+DI is a pattern where classes receive their dependencies from an external source (like a container) rather than creating them internally.
+
+**Why it's used:**  
+It promotes loose coupling, makes code testable, avoids duplicate object creation logic, and simplifies future changes.
+
+**Alternatives:**  
+Direct instantiation of dependencies within classes, leading to tight coupling and repetitive code.
+
+---
+
+## Repository Pattern
+
+**What it is:**  
+Abstracts data access logic through repository classes (e.g., `VillaRepository`) and interfaces. A Generic Repository handles reusable CRUD operations for different entities.
+
+**Why it's used:**  
+Encapsulates database operations and moves them out of controllers. Promotes reuse and separation of concerns.
+
+**Alternatives:**  
+Direct use of `ApplicationDbContext` within controllers.
+
+---
+
+## Unit of Work Pattern
+
+**What it is:**  
+Acts as a wrapper around repositories and provides a single point to save all changes in a transaction-safe manner (e.g., `_unitOfWork.Save()`).
+
+**Why it's used:**  
+Reduces clutter by avoiding injecting multiple repositories into controllers and ensures all related DB operations are committed or rolled back together.
+
+**Alternatives:**  
+Injecting multiple repositories individually and using separate save methods.
+
+---
+
+## Partial View
+
+**What it is:**  
+Reusable view components rendered inside other views. Named with an underscore (e.g., `_Layout.cshtml`).
+
+**Why it's used:**  
+Reduces code duplication and simplifies the UI by encapsulating repeated elements.
+
+**Alternatives:**  
+Manually duplicating HTML across views (less efficient and harder to maintain).
+
+---
+
+These patterns are employed throughout the project to structure the application, manage dependencies, handle data access, and organize the user interface according to the principles of Clean Architecture and MVC.
