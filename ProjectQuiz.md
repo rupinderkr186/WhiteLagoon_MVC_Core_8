@@ -109,3 +109,58 @@ Consider the following questions and formulate a detailed response for each. *Do
 | **ViewModel** | A model specifically designed for views. |
 | **ViewResult** | An ActionResult that renders a view. |
 | **wwwroot** | Folder for serving static assets in ASP.NET Core.
+
+### What is the recommended approach for troubleshooting errors when programming in .NET Core MVC?
+
+The initial step when encountering an error is to search for the error message on Google. Often, this will lead to a solution from the vast online community. If Google doesn't provide a sufficient answer, the next step is to consult question and answer sections on platforms like Udemy, looking for similar issues faced by other students and their resolutions. If neither of these steps is fruitful, raising a new question is necessary. When raising a new question, it's crucial to clearly define the issue, provide steps to reproduce it, and most importantly, include a GitHub link to your project. Providing a project link is vital because errors can stem from interactions between different files, making it difficult to diagnose without access to the full code.
+
+### What is the role of the `Program.cs` file in a .NET Core MVC application?
+
+The `Program.cs` file is the entry point for configuring services and the request pipeline in a .NET Core MVC application. While initially it might contain unfamiliar concepts like middleware, its primary purpose is to serve as the central location for adding services to the dependency injection container and defining the sequence of middleware components that handle incoming requests. This includes configuring aspects like HTTPS redirection, serving static files, routing, and authorization. Although the specifics of these configurations might be complex at first, understanding that this file is where core application services and the request handling flow are set up is the key takeaway.
+
+### How does routing typically work in a .NET Core MVC application based on the URL?
+
+In an MVC application, the routing pattern after the domain name and port usually follows the structure: `ControllerName/ActionName/Id`. The first segment after the domain is typically the Controller Name. The second segment is the Action Name, which is a method within that controller. The optional third segment, often indicated by a question mark in the default route pattern in `Program.cs`, represents an Id or a parameter passed to the action method. If no action is specified in the URL, the application defaults to the `Index` action within the specified controller. If neither a controller nor an action is specified, the application will use the default route configured in `Program.cs`, which is typically set to the `Home` controller and `Index` action.
+
+### What are the key folders and their purposes in a typical .NET Core MVC project structure?
+
+A standard .NET Core MVC project includes several important folders:
+
+- **Controllers**: Contains the controller classes, which handle incoming requests, interact with models, and select the appropriate view to render. Controller names must end with the `Controller` keyword.
+- **Models**: Holds classes that represent the data used by the application. These models can be simple data classes or more complex view models tailored for specific views.
+- **Views**: Contains the `.cshtml` files, which are the templates used to generate the HTML output sent to the user's browser. Views are typically organized into subfolders that match the names of their corresponding controllers.
+
+### How do MVC controllers determine which view to render, and what is the significance of naming conventions?
+
+When an action method in a controller returns `View()`, the MVC framework looks for a view with the same name as the action method within a subfolder in the `Views` folder that matches the controller's name. For example, if the `HomeController` has an `Index` action that returns `View()`, the framework will look for `Views/Home/Index.cshtml`. If a view name is explicitly provided in the `View()` method (e.g., `return View("Privacy")`), the framework will look for a view with that specific name within the controller's view folder. This naming convention is crucial for the framework to automatically locate and render the correct view.
+
+### What are `_Layout.cshtml`, `_ViewStart.cshtml`, and `_ViewImports.cshtml`, and how do they contribute to organizing views?
+
+These special files play important roles in managing views in MVC:
+
+- **_Layout.cshtml**: Serves as the master page or template for the application's views. It contains common HTML structure, navigation, and other elements shared across multiple pages.
+- **_ViewStart.cshtml**: Executed before any view is rendered. Typically used to set the default layout for all views by specifying the path to the `_Layout.cshtml` file.
+- **_ViewImports.cshtml**: Allows you to define global `using` statements and add tag helpers that will be available in all views within the folder and its subfolders without needing to add them individually to each view file.
+
+### How does Entity Framework Core handle database interactions like adding, updating, and retrieving data, particularly with migrations?
+
+Entity Framework Core (EF Core) allows you to interact with databases using C# objects (entities) and LINQ queries instead of writing raw SQL. You define your data models as C# classes and create a `DbContext` class to represent your database session. Migrations are a key feature of EF Core that enables you to evolve your database schema as your data models change.
+
+When you add a migration, EF Core compares your current `DbContext` snapshot with the last applied migration and generates code to create, alter, or drop tables and columns accordingly. Running the `update-database` command applies these pending migrations to your actual database. EF Core also automatically handles mapping between your C# properties and database columns, including setting up primary keys and handling relationships.
+
+### What is the purpose of Clean Architecture in .NET Core MVC, and how do concepts like Dependency Injection, Repositories, and Unit of Work contribute to it?
+
+Clean Architecture aims to create applications that are independent of external frameworks and databases, making them more testable, maintainable, and scalable. It achieves this by dividing the application into distinct layers with specific responsibilities:
+
+- **Domain Layer**: Contains the core business logic and entities, independent of any framework or database.
+- **Application Layer**: Defines interfaces and use cases based on the domain layer, orchestrating the flow of the application.
+- **Infrastructure Layer**: Handles external concerns like database interaction (using EF Core), file storage, and external services, implementing the interfaces defined in the application layer.
+- **Web Layer**: The user interface (MVC application) depends on the application and infrastructure layers to interact with core logic and data.
+
+**Dependency Injection (DI)** is fundamental to Clean Architecture, allowing components to receive their dependencies (like database contexts or repositories) through constructors or properties rather than creating them directly. This promotes loose coupling and testability.
+
+**Repositories** abstract the data access logic, providing a clear interface for interacting with specific entities (e.g., a `IVillaRepository` for Villa data). They typically reside in the infrastructure layer and implement interfaces defined in the application layer.
+
+**Unit of Work** acts as a wrapper around multiple repositories and manages database transactions. Instead of saving changes through individual repositories, the Unit of Work provides a central `Save` method, ensuring that all changes within a business operation are committed or rolled back together. This simplifies transaction management and further decouples the application logic from direct database operations.
+
+By implementing these patterns, Clean Architecture promotes a well-structured and maintainable codebase.
